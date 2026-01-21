@@ -19,9 +19,9 @@ function App() {
     const today = new Date().toISOString().split('T')[0]
     return saved ? JSON.parse(saved) : {
       [today]: {
-        1: { rajin: 85, sopan: 90, disiplin: 88, attendance: 'present' },
-        2: { rajin: 70, sopan: 75, disiplin: 80, attendance: 'present' },
-        3: { rajin: 95, sopan: 98, disiplin: 92, attendance: 'absent' },
+        1: { rajin: 0, sopan: 0, disiplin: 0, attendance: 'absent' },
+        2: { rajin: 0, sopan: 0, disiplin: 0, attendance: 'absent' },
+        3: { rajin: 0, sopan: 0, disiplin: 0, attendance: 'absent' },
       }
     }
   })
