@@ -39,6 +39,8 @@ function App() {
 
   const [search, setSearch] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const [studentToDelete, setStudentToDelete] = useState(null)
   const [newStudent, setNewStudent] = useState({ name: '', class: '' })
 
   const filteredStudents = useMemo(() => {
@@ -97,9 +99,16 @@ function App() {
     })
   }
 
-  const deleteStudent = (id) => {
-    if (window.confirm('Hapus data siswa ini?')) {
-      setStudents(students.filter(s => s.id !== id))
+  const requestDelete = (student) => {
+    setStudentToDelete(student)
+    setIsDeleteModalOpen(true)
+  }
+
+  const confirmDelete = () => {
+    if (studentToDelete) {
+      setStudents(students.filter(s => s.id !== studentToDelete.id))
+      setIsDeleteModalOpen(false)
+      setStudentToDelete(null)
     }
   }
 
@@ -221,7 +230,7 @@ function App() {
                 </div>
                 <button
                   className="btn-icon btn-delete"
-                  onClick={() => deleteStudent(student.id)}
+                  onClick={() => requestDelete(student)}
                   title="Hapus Siswa"
                 >
                   🗑️
@@ -273,6 +282,35 @@ function App() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {isDeleteModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal modal-delete">
+            <div className="modal-icon warning">⚠️</div>
+            <h2>Hapus Siswa?</h2>
+            <p>Anda akan menghapus data <strong>{studentToDelete?.name}</strong>. Tindakan ini tidak dapat dibatalkan.</p>
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+              <button
+                className="btn btn-danger"
+                style={{ flex: 1 }}
+                onClick={confirmDelete}
+              >
+                Hapus
+              </button>
+              <button
+                type="button"
+                className="btn"
+                style={{ background: '#f1f5f9', flex: 1 }}
+                onClick={() => {
+                  setIsDeleteModalOpen(false)
+                  setStudentToDelete(null)
+                }}
+              >
+                Batal
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -492,6 +492,35 @@ header {
   color: white;
 }
 
+.modal-delete {
+  text-align: center;
+  max-width: 400px;
+}
+
+.modal-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.modal-icon.warning {
+  color: var(--warning);
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+.modal-delete p {
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {
